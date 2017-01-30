@@ -48,7 +48,7 @@ public class MyServiceImpl implements MyService {
 
     @Override
     public Book getBookByName(String name) {
-        return repo.findBytitle(name);
+        return repo.findByTitle(name);
     }
 
     @Override
