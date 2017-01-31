@@ -8,28 +8,45 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="BOOK")
+@Table(name = "BOOK")
 public class Book {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-//	@Column(name = "BOOK_ID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "BOOK_ID")
 	private Long bookId;
 
-//	@Column(name = "TITLE")
+	@Column(name = "TITLE")
 	private String title;
 
-//	@Column(name = "PUBLISH_DATE")
+	@Column(name = "PUBLISH_DATE")
 	private Date publishDate;
 
-//	@Column(name = "PAGE_COUNT")
+	@Column(name = "PAGE_COUNT")
 	private int pageCount;
 
-//	@Column(name = "PRICE")
+	@Column(name = "PRICE")
 	private BigDecimal price;
+
+	@ManyToOne
+	@JoinColumn(name="AUTHOR_ID")
+	private Author author;
+
+	public Book() {
+
+	}
+
+	public Book(String title, Date publishDate, int pageCount, BigDecimal price) {
+		this.title = title;
+		this.publishDate = publishDate;
+		this.pageCount = pageCount;
+		this.price = price;
+	}
 
 	public Long getBookId() {
 		return bookId;
@@ -71,5 +88,18 @@ public class Book {
 		this.price = price;
 	}
 
+	public Author getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(Author author) {
+		this.author = author;
+	}
+
+	@Override
+	public String toString() {
+		return "Book [bookId=" + bookId + ", title=" + title + ", publishDate=" + publishDate + ", pageCount="
+				+ pageCount + ", price=" + price + ", author=" + author + "]";
+	}
 
 }

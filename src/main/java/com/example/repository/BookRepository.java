@@ -34,4 +34,9 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     List<Book> findTopByOrderByPageCountDesc();
     List<Book> findFirstByOrderByPageCountDesc(); //same top
     List<Book> findTop3ByOrderByPriceDesc();
+
+    //
+    List<Book> findByAuthorFirstName(String arg);
+    List<Book> findByAuthorCountry(String arg);
+    List<Book> findByAuthor_Country(String arg); //this also works
 }

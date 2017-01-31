@@ -32,9 +32,19 @@ public class SpringDataTestApplication {
 //        }
 //
 
+//        for (Book book :
+//                repo.findTop3ByOrderByPriceDesc()) {
+//            System.out.println(book.getBookId()+" | "+book.getTitle());
+//        }
+
         for (Book book :
-                repo.findTop3ByOrderByPriceDesc()) {
-            System.out.println(book.getBookId()+" | "+book.getTitle());
+                repo.findByAuthorFirstName("Alexandre")) {
+            System.out.println(book.toString());
+        }
+
+        for (Book book :
+                repo.findByAuthor_Country("Russia")) {
+            System.out.println(book.toString());
         }
     }
 
