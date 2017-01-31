@@ -10,10 +10,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "BOOK")
+@NamedQueries({@NamedQuery(name = "Book.queryOne", query = "select b from Book b"),  //this name should be as repository methods
+		@NamedQuery(name = "Book.queryTwo", query = "select b from Book b where b.pageCount > ?1"),
+		@NamedQuery(name = "Book.queryThree", query = "select b from Book b where b.title = " +
+				":title")})
 public class Book {
 
 	@Id
