@@ -6,8 +6,13 @@ import com.example.repository.BookRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @SpringBootApplication
 @RestController
@@ -48,6 +53,10 @@ public class SpringDataTestApplication {
                 repo.findAll(new Sort(Sort.Direction.ASC,"author.lastName","pageCount"))) {
             System.out.println(book.toString());
         }
+
+        List<Book> page = repo.findByPageCountGreaterThan(100, new PageRequest(0,2));
+
+
     }
 
 }
