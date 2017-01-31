@@ -17,8 +17,15 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     List<Book> findByTitleContaining(String bookName);
 
     List<Book> findByTitleStartingWith(String bookName);
-//
+
     List<Book> findByTitleEndingWith(String bookName);
 
     List<Book> findByTitleIgnoreCase(String bookName);
+
+    //relational operations
+    List<Book> findByPageCountGreaterThan(int pageCount);
+    List<Book> findByPageCountGreaterThanEqual(int pageCount);
+    List<Book> findByPageCountLessThanEqual(int pageCount);
+    List<Book> findByPageCountBetween(int min, int max);
+
 }

@@ -26,6 +26,11 @@ public class SpringDataTestApplication {
             System.out.println("------ "+book.getTitle());
         }
 
+        for (Book book :
+                repo.findByPageCountBetween(10, 300)) {
+            System.out.println(book.getTitle());
+        }
+
     }
 
 
