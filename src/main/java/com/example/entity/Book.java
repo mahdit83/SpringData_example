@@ -104,8 +104,8 @@ public class Book {
 
 	@Override
 	public String toString() {
-		return "Book [bookId=" + bookId + ", title=" + title + ", publishDate=" + publishDate + ", pageCount="
-				+ pageCount + ", price=" + price + ", author=" + author + "]";
+		return "Book [" + bookId + " | " + title + " | " + publishDate + " | pageCount="
+				+ pageCount + " | " + price + "& ( " + author + "]";
 	}
 
 }

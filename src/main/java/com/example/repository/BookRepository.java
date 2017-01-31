@@ -3,6 +3,7 @@ package com.example.repository;
 import com.example.entity.Book;
 
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -61,4 +62,5 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     //paging and and sorting
     List<Book> findByPageCountGreaterThan(int pageCount, Pageable pageable);
+    List<Book> findByPageCountGreaterThan(int pageCount, Sort sortable);
 }

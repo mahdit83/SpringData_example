@@ -6,7 +6,7 @@ import com.example.repository.BookRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
@@ -33,8 +33,19 @@ public class SpringDataTestApplication {
 //            System.out.println("_ _____________________ _");
 //        }
 
+//        for (Book book :
+//                repo.findByPageCountGreaterThan(300,new PageRequest(0,2))) {
+//            System.out.println(book.toString());
+//        }
+
         for (Book book :
-                repo.findByPageCountGreaterThan(300,new PageRequest(0,2))) {
+                repo.findAll(new Sort(Sort.Direction.DESC,"pageCount").and(new Sort("author.lastName")))) {
+            System.out.println(book.toString());
+        }
+
+        for (Book book :
+                // first asc the author name and when it is the same sort by page count
+                repo.findAll(new Sort(Sort.Direction.ASC,"author.lastName","pageCount"))) {
             System.out.println(book.toString());
         }
     }
