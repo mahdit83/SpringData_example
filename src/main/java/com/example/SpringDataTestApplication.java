@@ -24,13 +24,18 @@ public class SpringDataTestApplication {
 
 
         //paging
-        for (int i = 0; i < 5; i++) {
+//        for (int i = 0; i < 5; i++) {
+//
+//            for (Book book :
+//                    repo.findAll(new PageRequest(i,2))) {
+//                System.out.println(book.toString());
+//            }
+//            System.out.println("_ _____________________ _");
+//        }
 
-            for (Book book :
-                    repo.findAll(new PageRequest(i,2))) {
-                System.out.println(book.toString());
-            }
-            System.out.println("_ _____________________ _");
+        for (Book book :
+                repo.findByPageCountGreaterThan(300,new PageRequest(0,2))) {
+            System.out.println(book.toString());
         }
     }
 
