@@ -21,29 +21,8 @@ public class SpringDataTestApplication {
         // (repository is a compnent)
         BookRepository repo = context.getBean(BookRepository.class);
 
-//        for (Book book :
-//                repo.findByTitleEndingWith("s")) {
-//            System.out.println("------ "+book.getTitle());
-//        }
-//
-//        for (Book book :
-//                repo.findByPageCountBetween(10, 300)) {
-//            System.out.println(book.getTitle());
-//        }
-//
-
-//        for (Book book :
-//                repo.findTop3ByOrderByPriceDesc()) {
-//            System.out.println(book.getBookId()+" | "+book.getTitle());
-//        }
-
         for (Book book :
-                repo.findByAuthorFirstName("Alexandre")) {
-            System.out.println(book.toString());
-        }
-
-        for (Book book :
-                repo.findByAuthor_Country("Russia")) {
+                repo.queryThree("Of Mice and Men")) {
             System.out.println(book.toString());
         }
     }

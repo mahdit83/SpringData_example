@@ -3,6 +3,8 @@ package com.example.repository;
 import com.example.entity.Book;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -35,8 +37,18 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     List<Book> findFirstByOrderByPageCountDesc(); //same top
     List<Book> findTop3ByOrderByPriceDesc();
 
-    //
+
     List<Book> findByAuthorFirstName(String arg);
     List<Book> findByAuthorCountry(String arg);
     List<Book> findByAuthor_Country(String arg); //this also works
+
+    //additional techniques
+    @Query("select b from Book b")
+    List<Book> queryOne();
+
+    @Query("select b from Book b where b.pageCount > ?1")
+    List<Book> queryTwo(int count);
+
+    @Query("select b from Book b where b.title = :title")
+    List<Book> queryThree(@Param("title") String param);
 }
