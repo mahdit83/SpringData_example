@@ -12,8 +12,8 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     Book findByTitle(String bookName);
 
-    List<Book> findByTitleLike(String bookName);
-    List<Book> findByTitleContaining(String bookName);
+    List<Book> findByTitleLikeOrderByTitleAsc(String bookName);
+    List<Book> findByTitleContainingOrderByTitleDesc(String bookName);
     List<Book> findByTitleStartingWith(String bookName);
     List<Book> findByTitleEndingWith(String bookName);
     List<Book> findByTitleIgnoreCase(String bookName);
@@ -30,5 +30,8 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     List<Book> findByTitleNotContaining(String param1);
     List<Book> findByTitleNot(String param1);
 
-
+    //limiting query result
+    List<Book> findTopByOrderByPageCountDesc();
+    List<Book> findFirstByOrderByPageCountDesc(); //same top
+    List<Book> findTop3ByOrderByPriceDesc();
 }

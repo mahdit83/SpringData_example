@@ -33,8 +33,8 @@ public class SpringDataTestApplication {
 //
 
         for (Book book :
-                repo.findByTitleNotContaining("War and")) {
-            System.out.println(book.getBookId());
+                repo.findTop3ByOrderByPriceDesc()) {
+            System.out.println(book.getBookId()+" | "+book.getTitle());
         }
     }
 
