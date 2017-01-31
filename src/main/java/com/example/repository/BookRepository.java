@@ -41,7 +41,7 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     List<Book> findByAuthorCountry(String arg);
     List<Book> findByAuthor_Country(String arg); //this also works
 
-    //additional techniques
+    //additional techniques (this is easier that second method)
 //    @Query("select b from Book b")
 //    List<Book> queryOne();
 //
@@ -57,4 +57,6 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     List<Book> queryTwo(int pageCount);
 
     List<Book> queryThree(@Param("title") String title);
+
+    //paging and and sorting
 }

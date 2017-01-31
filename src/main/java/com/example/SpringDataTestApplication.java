@@ -6,6 +6,7 @@ import com.example.repository.BookRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
@@ -21,9 +22,15 @@ public class SpringDataTestApplication {
         // (repository is a compnent)
         BookRepository repo = context.getBean(BookRepository.class);
 
-        for (Book book :
-                repo.queryThree("Of Mice and Men")) {
-            System.out.println(book.toString());
+
+        //paging
+        for (int i = 0; i < 5; i++) {
+
+            for (Book book :
+                    repo.findAll(new PageRequest(i,2))) {
+                System.out.println(book.toString());
+            }
+            System.out.println("_ _____________________ _");
         }
     }
 
