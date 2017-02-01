@@ -3,6 +3,7 @@ package com.example.repository;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -28,7 +29,17 @@ public class ExtendedRepositoryImpl<T, ID extends Serializable> extends SimpleJp
 			+ " e where e." + this.entityInformation.getIdAttribute().getName() + " in :ids");
 		query.setParameter("ids", Arrays.asList(ids));
 		System.out.println(query.getResultList());
-		return (List<T>) query.getResultList();
+        long wait = new Random().nextInt(1000-9)+1;
+        System.out.println(wait);
+
+        try {
+            Thread.sleep(wait);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(" Id is "+Arrays.toString(ids));
+
+        return (List<T>) query.getResultList();
 	}
 
     @Override
