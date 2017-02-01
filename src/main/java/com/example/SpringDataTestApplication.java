@@ -24,9 +24,8 @@ public class SpringDataTestApplication {
     public static void main(String[] args) {
         ApplicationContext context = SpringApplication.run(SpringDataTestApplication.class, args);
         BookRepository repo = context.getBean(BookRepository.class);
-        Book book = new Book();
-        book.setTitle("dynamic book");
-        repo.saveAndLog(book);
+
+        repo.findByIds(1l,2l,5l);
     }
 
 }

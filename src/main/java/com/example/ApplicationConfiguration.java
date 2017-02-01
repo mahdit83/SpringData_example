@@ -1,5 +1,8 @@
 package com.example;
 
+import com.example.repository.ExtendedRepositoryImpl;
+
+import org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -18,9 +21,10 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 @Configuration
-@EnableJpaRepositories("com.example")
+@EnableJpaRepositories(basePackages = {"com.example"}, repositoryBaseClass = ExtendedRepositoryImpl.class)
+//@EnableJpaAuditing
 @EnableTransactionManagement
-@ComponentScan("com.example")
+@ComponentScan("com.example.repository")
 public class ApplicationConfiguration {
 
     @Bean
@@ -32,8 +36,7 @@ public class ApplicationConfiguration {
     @Bean
     public EntityManagerFactory entityManagerFactory() {
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-        vendorAdapter.setGenerateDdl(true); //tell hibernate automatically constructor our tables
-        // when start app
+        vendorAdapter.setGenerateDdl(true); //tell hibernate automatically constructor our tables when start app
 
         Properties jpaProperties = new Properties();
         jpaProperties.put("hibernate.hbm2ddl.auto", "create-drop");
@@ -48,6 +51,7 @@ public class ApplicationConfiguration {
 
         return factory.getObject();
     }
+
 
     @Bean
     public PlatformTransactionManager transactionManager(){
