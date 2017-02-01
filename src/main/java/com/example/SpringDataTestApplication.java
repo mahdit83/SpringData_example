@@ -26,6 +26,7 @@ public class SpringDataTestApplication {
         BookRepository repo = context.getBean(BookRepository.class);
 
         repo.findByIds(1l,2l,5l);
+        repo.findMahdiTajik("Of Mice and Men");
     }
 
 }

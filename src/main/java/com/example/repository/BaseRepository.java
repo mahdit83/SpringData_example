@@ -10,4 +10,6 @@ import org.springframework.data.repository.NoRepositoryBean;
 public interface BaseRepository<T, ID extends Serializable> extends JpaRepository<T, ID> {
 
 	public List<T> findByIds(ID...ids);
+
+	T findMahdiTajik(String name);
 }

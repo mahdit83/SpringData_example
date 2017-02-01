@@ -31,4 +31,13 @@ public class ExtendedRepositoryImpl<T, ID extends Serializable> extends SimpleJp
 		return (List<T>) query.getResultList();
 	}
 
+    @Override
+    public T findMahdiTajik(String name) {
+        Query query = this.entityManger.createQuery("select e from " + this.entityInformation.getEntityName()
+                + " e where e.title= :name");
+        query.setParameter("name", name);
+        System.out.println(query.getSingleResult());
+        return null;
+    }
+
 }
