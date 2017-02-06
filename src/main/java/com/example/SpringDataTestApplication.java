@@ -31,12 +31,12 @@ public class SpringDataTestApplication {
 //            repo.findByIds(1l,2l,3l);
 //        }
 
-        Book book = new Book();
-        book.setTitle("title");
-        book.setPageCount(400);
-        repo.save(book);
+//        Book book = new Book();
+//        book.setTitle("title");
+//        book.setPageCount(400);
+//        repo.save(book);
 
-        System.out.println(repo.findOne(book.getBookId()));
+        System.out.println(repo.setPageCount("Animal Farm",1000));
     }
 
 }
