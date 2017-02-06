@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.task.TaskExecutor;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
@@ -24,7 +25,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableJpaRepositories(basePackages = {"com.example"}, repositoryBaseClass = ExtendedRepositoryImpl.class)
-//@EnableJpaAuditing
+@EnableJpaAuditing
 @EnableTransactionManagement
 @ComponentScan("com.example.repository")
 public class ApplicationConfiguration {
@@ -60,6 +61,11 @@ public class ApplicationConfiguration {
         JpaTransactionManager txManager = new JpaTransactionManager();
         txManager.setEntityManagerFactory(entityManagerFactory());
         return txManager;
+    }
+
+    @Bean
+    public CustomAuditorAware provideCustomAuditorAware(){
+        return new CustomAuditorAware();
     }
 
     // this is needed for AsyncTask

@@ -8,10 +8,12 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -25,9 +27,16 @@ public class SpringDataTestApplication {
         ApplicationContext context = SpringApplication.run(SpringDataTestApplication.class, args);
         BookRepository repo = context.getBean(BookRepository.class);
 
-        for (int i = 0; i < 4; i++) {
-            repo.findByIds(1l,2l,3l);
-        }
+//        for (int i = 0; i < 4; i++) {
+//            repo.findByIds(1l,2l,3l);
+//        }
+
+        Book book = new Book();
+        book.setTitle("title");
+        book.setPageCount(400);
+        repo.save(book);
+
+        System.out.println(repo.findOne(book.getBookId()));
     }
 
 }

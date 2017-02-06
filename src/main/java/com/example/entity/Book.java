@@ -1,10 +1,17 @@
 package com.example.entity;
 
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,6 +27,7 @@ import javax.persistence.Table;
 		@NamedQuery(name = "Book.queryTwo", query = "select b from Book b where b.pageCount > ?1"),
 		@NamedQuery(name = "Book.queryThree", query = "select b from Book b where b.title = " +
 				":title")})
+@EntityListeners(AuditingEntityListener.class)
 public class Book {
 
 	@Id
@@ -42,6 +50,42 @@ public class Book {
 	@ManyToOne
 	@JoinColumn(name="AUTHOR_ID")
 	private Author author;
+
+	@CreatedBy
+	private String createdBy;
+
+	@LastModifiedBy
+	private String lastModifiedBy;
+
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public String getLastModifiedBy() {
+		return lastModifiedBy;
+	}
+
+	public void setLastModifiedBy(String lastModifiedBy) {
+		this.lastModifiedBy = lastModifiedBy;
+	}
+
+	public Date getLastModifiedDate() {
+		return lastModifiedDate;
+	}
+
+	public void setLastModifiedDate(Date lastModifiedDate) {
+		this.lastModifiedDate = lastModifiedDate;
+	}
+
+	@CreatedDate
+	private Date createdDate;
+
+	@LastModifiedDate
+	private Date lastModifiedDate;
 
 	public Book() {
 
@@ -105,7 +149,8 @@ public class Book {
 	@Override
 	public String toString() {
 		return "Book [" + bookId + " | " + title + " | " + publishDate + " | pageCount="
-				+ pageCount + " | " + price + "& ( " + author + "]";
+				+ pageCount + " | " + price + "& ( " + author + "]" +
+				" LastModifiedBy="+lastModifiedBy+" * "+"LastModifiedBy="+lastModifiedBy+" * createdDate="+createdDate;
 	}
 
 }
